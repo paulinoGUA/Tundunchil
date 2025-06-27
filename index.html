@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Juego Didáctico Andino</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #fefefe;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #c62828;
+    }
+    section {
+      background: white;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    .draggable {
+      background: #81d4fa;
+      padding: 8px;
+      margin: 5px;
+      cursor: move;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .dropzone {
+      min-width: 100px;
+      min-height: 30px;
+      border: 2px dashed #aaa;
+      margin: 5px;
+      display: inline-block;
+      vertical-align: middle;
+      padding: 5px;
+    }
+    select {
+      font-size: 16px;
+    }
+    button {
+      margin-top: 10px;
+      background-color: #29b6f6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+    img {
+      max-width: 200px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Juego Didáctico Andino</h1>
+
+  <section id="juego1">
+    <h2>Juego 1: Clasifica las palabras</h2>
+    <img src="images/mama-danza.jpg" alt="Mama Danza" />
+    <img src="images/wawa-danza.jpg" alt="Wawa Danza" />
+    <div id="grupo-palabras">
+      <div class="draggable" draggable="true" ondragstart="drag(event)">Cushma</div>
+      <div class="draggable" draggable="true" ondragstart="drag(event)">Chumpi</div>
+      <div class="draggable" draggable="true" ondragstart="drag(event)">Sombrero blanco</div>
+      <div class="draggable" draggable="true" ondragstart="drag(event)">Pinkullu</div>
+      <div class="draggable" draggable="true" ondragstart="drag(event)">Pollerín</div>
+      <div class="draggable" draggable="true" ondragstart="drag(event)">Alfanje</div>
+    </div>
+    <h3>Mama Danza</h3>
+    <div class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <h3>Wawa Danza</h3>
+    <div class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+  </section>
+
+  <section id="juego2">
+    <h2>Juego 2: Crónica de los Danzantes del Sol</h2>
+    <p>
+      Cuando el <span class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)"></span> despertaba entre las montañas, los Wawa Danza ya estaban en la plaza.
+      Ataban su <span class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)"></span>, recogían su <span class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)"></span> con símbolos ancestrales,
+      y esperaban la señal del <span class="dropzone" ondrop="drop(event)" ondragover="allowDrop(event)"></span>.
+    </p>
+    <div>
+      <div class="draggable" draggable="true" ondragstart="drag(event)">Inti</div>
+      <div class="draggable" draggable="true" ondragstart="drag(event)">Atuendo</div>
+      <div class="draggable" draggable="true" ondragstart="drag(event)">Alfanje</div>
+      <div class="draggable" draggable="true" ondragstart="drag(event)">Tauna</div>
+    </div>
+  </section>
+
+  <section id="juego3">
+    <h2>Juego 3: Asociar Festividades</h2>
+    <p>Killa Raymi →
+      <select>
+        <option value="">Selecciona</option>
+        <option>Fiesta de la Luna</option>
+        <option>Fiesta del Sol</option>
+      </select>
+    </p>
+    <p>Kapak Raymi →
+      <select>
+        <option value="">Selecciona</option>
+        <option>Fiesta del Poder</option>
+        <option>Fiesta del Florecimiento</option>
+      </select>
+    </p>
+    <p>Pawkar Raymi →
+      <select>
+        <option value="">Selecciona</option>
+        <option>Fiesta del Florecimiento</option>
+        <option>Fiesta de la Luna</option>
+      </select>
+    </p>
+    <p>Inti Raymi →
+      <select>
+        <option value="">Selecciona</option>
+        <option>Fiesta del Sol</option>
+        <option>Fiesta del Poder</option>
+      </select>
+    </p>
+  </section>
+
+  <script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.innerText);
+    }
+    function drop(ev) {
+      ev.preventDefault();
+      const data = ev.dataTransfer.getData("text");
+      const el = document.createElement("span");
+      el.innerText = data;
+      el.className = "draggable";
+      ev.target.innerHTML = "";
+      ev.target.appendChild(el);
+    }
+  </script>
+</body>
+</html>
